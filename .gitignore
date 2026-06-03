@@ -1,0 +1,16 @@
+node_modules
+dist
+coverage
+.DS_Store
+*.log
+*.tsbuildinfo
+playwright-report
+test-results
+dev-server/cert
+public/wasm
+.vite
+.env
+.env.*
+!.env.example
+.claude/settings.local.json
+.claude/scheduled_tasks.lock

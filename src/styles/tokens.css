@@ -1,0 +1,137 @@
+/*
+ * Design tokens — approximation of the Trimble Modus palette and type ramp
+ * (modus.trimble.com). Naming follows the Modus "semantic token"
+ * vocabulary (`color-primary`, `color-surface`, …) so use sites read as
+ * intent rather than colour. Keep raw hex values out of component CSS and
+ * TypeScript — reach for tokens instead.
+ *
+ * Dark-mode overrides live in the `@media (prefers-color-scheme: dark)`
+ * block at the bottom of this file.
+ */
+
+:root {
+  /* Brand */
+  --trimble-blue: #0063a3;
+  --trimble-blue-dark: #003f69;
+  --trimble-blue-light: #1e88c4;
+  --trimble-blue-pale: #d4e8f5;
+  --trimble-yellow: #ffbe00;
+
+  /* Neutrals (Modus-aligned ramp) */
+  --modus-gray-0: #ffffff;
+  --modus-gray-1: #f1f1f6;
+  --modus-gray-2: #e0e1e9;
+  --modus-gray-3: #cbcdd6;
+  --modus-gray-4: #a3a6b1;
+  --modus-gray-5: #6a6e79;
+  --modus-gray-6: #353a40;
+  --modus-gray-7: #252a2e;
+  --modus-gray-8: #171c1f;
+
+  /* Semantic surface + text */
+  --color-bg: var(--modus-gray-1);
+  --color-surface: var(--modus-gray-0);
+  --color-surface-alt: var(--modus-gray-1);
+  --color-overlay-scrim: rgba(23, 28, 31, 0.45);
+  --color-overlay-readout: rgba(23, 28, 31, 0.82);
+  --color-border: var(--modus-gray-3);
+  --color-border-strong: var(--modus-gray-4);
+  --color-text: var(--modus-gray-7);
+  --color-text-muted: var(--modus-gray-5);
+  --color-text-inverse: var(--modus-gray-0);
+
+  /* Action colors */
+  --color-primary: var(--trimble-blue);
+  --color-primary-hover: var(--trimble-blue-dark);
+  --color-on-primary: var(--modus-gray-0);
+  --color-primary-focus-ring: rgba(0, 99, 163, 0.35);
+  --color-secondary: var(--modus-gray-2);
+  --color-on-secondary: var(--modus-gray-7);
+  --color-disabled-opacity: 0.55;
+
+  /* Feedback */
+  --color-success: #1e8a44;
+  --color-warning: #e49325;
+  --color-danger: #da212c;
+  --color-danger-bg: rgba(218, 33, 44, 0.10);
+  --color-info: var(--trimble-blue);
+
+  /* Floorplan-specific (used by the SVG builder + viewer) */
+  --color-area: #e49325;
+  --color-area-fill: rgba(228, 147, 37, 0.18);
+  --color-snap: #1e8a44;
+  --color-selection: var(--trimble-blue);
+
+  --color-ifc-default: #1c1c1c;
+  --color-ifc-wall: #1c1c1c;
+  --color-ifc-slab: var(--modus-gray-5);
+  --color-ifc-door: #c2410c;
+  --color-ifc-window: var(--trimble-blue-light);
+  --color-ifc-column: var(--modus-gray-6);
+  --color-ifc-stair: #7c3aed;
+  --color-ifc-roof: #15803d;
+
+  /* Typography */
+  --font-family-base: "Open Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-family-mono: "Roboto Mono", "Source Code Pro", "Menlo", monospace;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.8125rem;
+  --font-size-base: 0.875rem;
+  --font-size-lg: 1rem;
+  --font-size-xl: 1.125rem;
+  --line-height-base: 1.45;
+
+  /* Spacing — 4px base with a half-step for dense surfaces */
+  --space-half: 2px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  /* Shape */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  /* Z-index scale */
+  --z-overlay: 10;
+  --z-dialog: 100;
+  --z-toast: 200;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgba(23, 28, 31, 0.08);
+  --shadow-md: 0 2px 6px rgba(23, 28, 31, 0.12);
+  --shadow-lg: 0 8px 24px rgba(23, 28, 31, 0.16);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    /* In dark mode we shift the neutral ramp; the brand stays the same so the
+       Trimble identity reads at a glance. */
+    --color-bg: var(--modus-gray-8);
+    --color-surface: var(--modus-gray-7);
+    --color-surface-alt: var(--modus-gray-6);
+    --color-overlay-scrim: rgba(0, 0, 0, 0.55);
+    --color-overlay-readout: rgba(0, 0, 0, 0.85);
+    --color-border: var(--modus-gray-6);
+    --color-border-strong: var(--modus-gray-5);
+    --color-text: var(--modus-gray-1);
+    --color-text-muted: var(--modus-gray-4);
+    --color-text-inverse: var(--modus-gray-8);
+    --color-secondary: var(--modus-gray-6);
+    --color-on-secondary: var(--modus-gray-1);
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.40);
+    --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.50);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.60);
+
+    /* The exported SVG stays light-on-light — printed plans must read on
+       paper. Only the in-app preview shifts to dark. */
+  }
+}

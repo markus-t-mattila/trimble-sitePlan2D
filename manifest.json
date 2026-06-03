@@ -1,0 +1,7 @@
+{
+  "icon": "https://markus-t-mattila.github.io/trimble-sitePlan2D/assets/icon.svg",
+  "title": "sitePlan2D",
+  "url": "https://markus-t-mattila.github.io/trimble-sitePlan2D/index.html",
+  "description": "Convert IFC files to per-storey SVG/JSON floorplans with world coordinates and on-top user-drawn named areas.",
+  "enabled": true
+}

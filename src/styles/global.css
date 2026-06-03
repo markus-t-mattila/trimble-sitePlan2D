@@ -1,0 +1,148 @@
+@import "./tokens.css";
+@import "./components.css";
+
+/*
+ * Global resets and top-level layout for the sitePlan2D extension.
+ *
+ * The extension renders inside an iframe owned by Trimble Connect. We want it
+ * to feel native, so the body fills the viewport and the layout uses the
+ * Modus colour tokens defined in tokens.css.
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Top-level grid: header, sidebar | main, footer. Sidebar collapses to a
+   stacked layout on narrow viewports so the extension stays usable in the
+   minimum allowed Trimble Connect panel width. */
+.app-layout {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+  grid-template-columns: 340px 1fr;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+  min-height: 100vh;
+}
+
+@media (max-width: 720px) {
+  .app-layout {
+    grid-template-areas:
+      "header"
+      "sidebar"
+      "main"
+      "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
+  }
+}
+
+.app-header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+  box-shadow: var(--shadow-sm);
+}
+.app-header__title {
+  flex: 1;
+}
+
+.app-sidebar {
+  grid-area: sidebar;
+  border-right: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  padding: var(--space-3);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.app-main {
+  grid-area: main;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--modus-gray-2);
+}
+
+.app-footer {
+  grid-area: footer;
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-2) var(--space-3);
+  background-color: var(--color-surface);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.status-error {
+  color: var(--color-danger);
+  font-weight: 600;
+}
+
+/* SVG viewer surface */
+.svg-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--modus-gray-1);
+}
+
+/*
+ * NB: stroke/fill/stroke-width for IFC objects and user areas are NOT set
+ * here — the embedded SVG `<style>` block (emitted by `svgBuilder.ts`)
+ * owns those decisions through CSS variables so the user-tunable stroke
+ * width actually wins. Adding `.svg-canvas .ifc-object { stroke-width:
+ * 0.05 }` here would silently override the per-document setting.
+ */
+
+.svg-canvas .user-area {
+  vector-effect: non-scaling-stroke;
+}
+
+/* Selection highlight applied to user areas and site elements via JS. */
+.svg-canvas .sel-highlight {
+  stroke: var(--color-selection) !important;
+  stroke-width: 0.18 !important;
+  filter: drop-shadow(0 0 4px rgba(0, 99, 163, 0.55));
+}
+
+.svg-canvas .ifc-label,
+.svg-canvas .user-area-label {
+  font-family: var(--font-family-base);
+  fill: var(--color-text);
+  text-anchor: middle;
+  dominant-baseline: middle;
+  paint-order: stroke fill;
+  stroke: rgba(255, 255, 255, 0.85);
+  stroke-width: 0.4px;
+  vector-effect: non-scaling-stroke;
+}

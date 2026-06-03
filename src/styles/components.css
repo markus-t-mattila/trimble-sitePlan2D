@@ -1,0 +1,1041 @@
+/*
+ * Reusable component primitives.
+ *
+ * Buttons, inputs, panels, and lists styled to match the Trimble Modus look.
+ * Components elsewhere should rely on these class names instead of inlining
+ * styles so the visual language stays consistent.
+ */
+
+/* Headings inside sidebar sections */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.section__title {
+  margin: 0;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: 0.01em;
+}
+.section__hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 32px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+.btn:hover:not(:disabled) {
+  background-color: var(--modus-gray-1);
+}
+.btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: var(--color-disabled-opacity);
+}
+.btn--primary {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  border-color: var(--color-primary);
+}
+.btn--primary:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+.btn--primary:focus-visible {
+  outline-color: var(--color-on-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-focus-ring);
+}
+.btn--danger {
+  background-color: var(--color-danger);
+  color: var(--color-on-primary);
+  border-color: var(--color-danger);
+}
+.btn--danger:hover:not(:disabled) {
+  background-color: #b51b24;
+  border-color: #b51b24;
+}
+.btn--ghost {
+  background-color: transparent;
+  border-color: transparent;
+}
+.btn--ghost:hover:not(:disabled) {
+  background-color: var(--modus-gray-2);
+}
+.btn--small {
+  height: 26px;
+  padding: 0 var(--space-2);
+  font-size: var(--font-size-xs);
+}
+.btn--icon {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: var(--radius-sm);
+}
+.btn-row {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+.btn-row--end {
+  justify-content: flex-end;
+}
+
+/* Inputs */
+.input,
+.select {
+  height: 32px;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  width: 100%;
+}
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-focus-ring);
+}
+.input--invalid {
+  border-color: var(--color-danger);
+}
+.input--invalid:focus {
+  box-shadow: 0 0 0 3px var(--color-danger-bg);
+}
+.input--inline {
+  height: 28px;
+}
+.input[type="color"] {
+  padding: 2px;
+  cursor: pointer;
+}
+.input[type="range"] {
+  height: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  accent-color: var(--color-primary);
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.field__label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+.field__hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+.field--row {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Lists used in sidebar (file browser, storeys, areas) */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.list-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-half);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  width: 100%;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+.list-item:hover {
+  background-color: var(--color-surface-alt);
+}
+.list-item:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+.list-item[aria-pressed="true"],
+.list-item[aria-checked="true"],
+.list-item[aria-selected="true"],
+.list-item--active {
+  background-color: var(--trimble-blue-pale);
+  border-color: var(--color-primary);
+}
+.list-item__primary {
+  font-weight: 500;
+  color: var(--color-text);
+}
+.list-item__secondary {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* Floating panel chrome (layer panel, render options, selection panel) */
+.floating-panel {
+  position: absolute;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-3);
+  font-size: var(--font-size-sm);
+  max-width: 280px;
+}
+.floating-panel__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+}
+.floating-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-2);
+}
+.floating-panel__header .floating-panel__title {
+  margin: 0;
+}
+/* X-close button on every selection sub-panel. Big enough to hit on a
+   touch screen, ghost-button styling so it doesn't compete with the
+   action buttons inside the panel body. */
+.floating-panel__close {
+  background: none;
+  border: 0;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.floating-panel__close:hover {
+  background-color: var(--color-surface-alt);
+  color: var(--color-text);
+}
+.floating-panel__close:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Inline checkbox + label rows for the layer panel and entity picker */
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-half) 0;
+  font-size: var(--font-size-sm);
+}
+.checkbox-row input[type="checkbox"] {
+  accent-color: var(--color-primary);
+  width: 16px;
+  height: 16px;
+}
+.checkbox-row:focus-within {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Drawing-tool hint banner */
+.drawing-hint {
+  position: absolute;
+  top: var(--space-3);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-overlay-readout);
+  color: var(--color-text-inverse);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  font-size: var(--font-size-sm);
+  max-width: calc(100% - 2 * var(--space-3));
+  z-index: var(--z-overlay);
+  pointer-events: none;
+}
+.drawing-hint__title {
+  font-weight: 600;
+}
+.drawing-hint__body {
+  opacity: 0.9;
+}
+
+/* Coordinate readout overlay */
+.coordinate-overlay {
+  position: absolute;
+  bottom: var(--space-2);
+  left: var(--space-2);
+  background-color: var(--color-overlay-readout);
+  color: var(--color-text-inverse);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  pointer-events: none;
+  user-select: none;
+  z-index: var(--z-overlay);
+}
+
+/* Color picker rows used by the render options panel */
+.swatch-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.swatch-row__color {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  padding: 0;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+/* Modal dialog — page-fixed so it works on phones and narrow Trimble panels */
+.dialog {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-overlay-scrim);
+  z-index: var(--z-dialog);
+  padding: var(--space-4);
+}
+.dialog__panel {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  min-width: min(320px, calc(100vw - var(--space-5)));
+  max-width: 480px;
+  /* Cap height so the modal never bleeds past the viewport when the
+     body grows (e.g. the Save modal with many storeys + per-storey
+     filename rows). The action row stays visible because we let the
+     internal list scroll instead of the whole panel. */
+  max-height: calc(100vh - var(--space-5));
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  border: 1px solid var(--color-border);
+}
+/* Inside dialog__panel, the per-storey list is the part that should
+   absorb the overflow. Other dialogs that don't use a `.list` (e.g.
+   ConfirmDialog) keep behaving normally. */
+.dialog__panel > .list {
+  overflow-y: auto;
+  min-height: 0;
+  flex: 1 1 auto;
+  margin: 0;
+}
+.dialog__panel--wide {
+  max-width: 760px;
+  width: min(760px, calc(100vw - var(--space-5)));
+}
+
+/* PDF export modal */
+.pdf-modal {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: var(--space-4);
+}
+@media (max-width: 700px) {
+  .pdf-modal {
+    grid-template-columns: 1fr;
+  }
+}
+.pdf-modal__preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: center;
+}
+.pdf-modal__paper-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+.pdf-modal__controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.pdf-preview {
+  position: relative;
+  width: 320px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  box-shadow: var(--shadow-md);
+  aspect-ratio: 1 / var(--pdf-preview-aspect, 1.414);
+  overflow: hidden;
+}
+.pdf-preview__usable {
+  position: absolute;
+  border: 1px dashed var(--color-border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-surface-alt);
+}
+.pdf-preview__inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pdf-preview__inner svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.dialog__native {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  z-index: var(--z-dialog);
+}
+.dialog__native::backdrop {
+  background-color: var(--color-overlay-scrim);
+}
+.dialog__title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+.dialog__error {
+  color: var(--color-danger);
+  font-size: var(--font-size-xs);
+}
+
+/* Empty state shown in the viewer before any floorplan is generated */
+.empty-state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  text-align: center;
+  color: var(--color-text-muted);
+}
+.empty-state__title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--color-text);
+}
+.empty-state__hint {
+  max-width: 360px;
+}
+
+/* Toolbar primary actions on the sidebar */
+.toolbar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.toolbar-actions .btn {
+  width: 100%;
+}
+
+/* Definition list used by the selection panel */
+.kv-list {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: var(--space-2);
+  row-gap: 4px;
+  font-size: var(--font-size-sm);
+}
+.kv-list dt {
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+.kv-list dd {
+  margin: 0;
+  word-break: break-word;
+}
+.kv-list dd code {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  background-color: var(--modus-gray-1);
+  padding: 2px 4px;
+  border-radius: var(--radius-sm);
+}
+
+/* Selection panel per-object controls */
+.selection-style {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border);
+}
+
+/* Save-to-Trimble modal per-storey row */
+.storey-row {
+  display: grid;
+  grid-template-columns: 22px 1fr auto auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  cursor: pointer;
+}
+.storey-row:hover {
+  background-color: var(--color-surface-alt);
+}
+.storey-row__primary {
+  font-weight: 500;
+}
+.storey-row__meta {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+@media (max-width: 700px) {
+  .storey-row {
+    grid-template-columns: 22px 1fr;
+  }
+  .storey-row__meta {
+    grid-column: 2;
+  }
+}
+
+/* Per-storey filename override row inside the Save modal. The forced
+   model-name prefix is rendered as a static span; only the suffix is
+   editable. The preview line below tells the user the exact filename
+   that will land in Trimble Connect — slugified live. */
+.storey-row__filename {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin: var(--space-1) 0 var(--space-3) calc(22px + var(--space-3));
+}
+.storey-row__filename-prefix {
+  font-family: var(--font-family-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  user-select: none;
+}
+.storey-row__filename-preview {
+  font-family: var(--font-family-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* Render options panel (in the sidebar) */
+.render-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Area list */
+.area-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  background-color: var(--color-surface);
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+.area-card--selected {
+  /* The same blue we use for canvas selection so eye-tracking between
+     the list and the canvas highlight stays effortless. */
+  border-color: var(--color-primary);
+  background-color: var(--trimble-blue-pale);
+}
+.area-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.area-card__name {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 500;
+}
+/* Make the name area click-target look button-like without the chunky
+   button border — the affordance is the whole row, not a chip. */
+.area-card__select {
+  flex: 1;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.area-card__select:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+.area-card__kind {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Site-element category swatch — inline coloured emoji button next to
+   the element's name in the "Placed elements" list. The square shows
+   the element's effective fill (inside) + stroke (border); clicking
+   either side opens a colour picker. The emoji on top tells the user
+   what category they're looking at. */
+.site-category-swatch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-right: var(--space-2);
+  border-radius: var(--radius-sm);
+  background-color: var(--swatch-fill, var(--color-surface));
+  border: 2px solid var(--swatch-stroke, var(--color-border));
+  cursor: pointer;
+  vertical-align: middle;
+}
+.site-category-swatch__emoji {
+  font-size: 14px;
+  line-height: 1;
+  pointer-events: none; /* clicks go to the colour pickers below */
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+.site-category-swatch__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* clicks go to the colour pickers below */
+  color: var(--swatch-stroke, currentColor);
+}
+.site-category-swatch__icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.site-category-swatch__picker {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0; /* covers half of the swatch, invisible until clicked */
+  background: transparent;
+}
+.site-category-swatch__picker--fill {
+  left: 0;
+}
+.site-category-swatch__picker--stroke {
+  right: 0;
+}
+.site-category-swatch__picker:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  opacity: 0.25;
+}
+.site-tools__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.site-tools__group-title {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+/* Tool picker pills.
+ *
+ * Previous look was "colour swatch + text" — the supervisor had to
+ * read the label every time. The new style leads with an emoji so the
+ * button reads at a glance ("oh that's the crane, that's parking").
+ * Keeps the active state explicit (filled background) and removes the
+ * old left-edge colour bar that was acting more as decoration than as
+ * a signal. */
+.site-tool-button {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2px;
+  min-width: 64px;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-2);
+  font: inherit;
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+.site-tool-button:hover:not(:disabled) {
+  background-color: var(--color-surface-alt);
+  border-color: var(--color-border-strong, var(--color-border));
+}
+.site-tool-button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+.site-tool-button--active,
+.site-tool-button[aria-pressed="true"] {
+  background-color: var(--trimble-blue-pale);
+  border-color: var(--color-primary);
+}
+.site-tool-button__emoji {
+  font-size: 22px;
+  line-height: 1;
+  /* Kept for backward-compat with any toolbars still on the emoji
+     surface; the navigation panel now renders `.site-tool-button__icon`
+     instead — a purpose-built monochrome SVG that picks up the
+     category's brand colour via the inline CSS variable below. */
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+.site-tool-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* SVG natively reports its size; we cap it so different viewBoxes
+     render at the same visual scale across the toolbar. */
+  color: var(--site-tool-color, currentColor);
+}
+.site-tool-button__icon svg {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+.site-tool-button--active .site-tool-button__icon,
+.site-tool-button[aria-pressed="true"] .site-tool-button__icon {
+  /* The active pill background is the brand-blue tint, so we flip the
+     icon to its `strokeColor`'s darker variant for contrast. The CSS
+     variable mechanism already does that via `--site-tool-color` —
+     no extra rule needed. */
+}
+.site-tool-button__label {
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Snap marker default visual */
+.snap-marker {
+  fill: var(--color-snap);
+}
+/* Shared snap-marker visual painted by the polygon/polyline tools while
+   drawing. The square (or 45°-rotated diamond for edge snaps) sits on
+   top of a thin white halo so it stays legible against any underlying
+   fill — IFC walls, user areas, dark site polygons — and a small
+   centre dot pinpoints the exact world point the click will lock to. */
+.snap-marker__group {
+  pointer-events: none;
+}
+.snap-marker__shape {
+  fill: none;
+  stroke: var(--color-snap, #e49325);
+  stroke-width: 0.06;
+  /* The white halo behind the orange stroke is the
+     `paint-order: stroke fill` trick — emit the white halo by
+     repeating the shape underneath. We pull this off with a thicker
+     stroke-shadow approximation. */
+  paint-order: stroke fill;
+  vector-effect: non-scaling-stroke;
+}
+.snap-marker__dot {
+  fill: var(--color-snap, #e49325);
+  stroke: #ffffff;
+  stroke-width: 0.03;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Polygon-tool overlay (drawn into the SVG by PolygonTool) */
+.draft-polygon {
+  fill: var(--color-area-fill);
+  stroke: var(--color-area);
+  stroke-width: 0.06;
+  vector-effect: non-scaling-stroke;
+}
+.draft-polygon__vertex {
+  fill: var(--color-area);
+}
+.draft-polygon__snap {
+  fill: none;
+  stroke: var(--color-snap);
+  stroke-width: 0.05;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Edit-overlay (drawn by EditOverlay when the user double-clicks a
+   selected area / site element to enter vertex-drag mode). Body grab is
+   the silhouette path; vertex / midpoint dots stack on top. Colours come
+   from Modus tokens so dark + light themes both stay legible. */
+.edit-overlay__body {
+  fill: rgba(0, 99, 163, 0.04);
+  stroke: var(--color-selection, #0063a3);
+  stroke-width: 0.12;
+  vector-effect: non-scaling-stroke;
+  cursor: move;
+}
+.edit-overlay__vertex {
+  fill: #ffffff;
+  fill-opacity: 0.95;
+  stroke: var(--color-selection, #0063a3);
+  stroke-width: 0.08;
+  vector-effect: non-scaling-stroke;
+  cursor: grab;
+  /* Pointer interactions only need the visible disc, but we want the
+     entire bounding box of the circle to be clickable so the user
+     doesn't have to land precisely on the centre. */
+  pointer-events: all;
+}
+.edit-overlay__vertex:active {
+  cursor: grabbing;
+}
+.edit-overlay__midpoint {
+  fill: var(--color-selection, #0063a3);
+  fill-opacity: 0.45;
+  stroke: var(--color-selection, #0063a3);
+  stroke-width: 0.04;
+  vector-effect: non-scaling-stroke;
+  cursor: crosshair;
+}
+/* Point selection halo — translucent circle painted behind everything
+   else so the user has zero doubt about which marker is in edit mode.
+   Pulses softly so the eye picks it out even on a busy canvas. */
+.edit-overlay__halo {
+  fill: rgba(0, 99, 163, 0.18);
+  stroke: var(--color-selection, #0063a3);
+  stroke-width: 0.12;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+  animation: edit-overlay-pulse 1.8s ease-in-out infinite;
+}
+@keyframes edit-overlay-pulse {
+  0%, 100% { fill-opacity: 0.18; }
+  50%      { fill-opacity: 0.32; }
+}
+/* The hint banner inside the canvas — gets a brighter chip so the user
+   can tell at a glance "I'm in edit mode" vs "I'm in draw mode". */
+.drawing-hint--edit {
+  background-color: var(--color-selection, #0063a3);
+  color: #ffffff;
+}
+/* Crane / point radius ring. Dashed so it's clearly an editing affordance
+   rather than the final swept circle. The handle on the east side is
+   draggable to resize. */
+.edit-overlay__radius-ring {
+  fill: none;
+  stroke: var(--color-selection, #0063a3);
+  stroke-width: 0.06;
+  stroke-dasharray: 0.4 0.25;
+  vector-effect: non-scaling-stroke;
+}
+.edit-overlay__radius-handle {
+  fill: #ffffff;
+  stroke: var(--color-selection, #0063a3);
+  stroke-width: 0.08;
+  vector-effect: non-scaling-stroke;
+  cursor: ew-resize;
+}
+/* Size handle: same look as the radius handle but at the corner of
+   the symbol's bounding box. Sits on every non-crane point. */
+.edit-overlay__size-handle {
+  fill: #ffffff;
+  stroke: var(--color-selection, #0063a3);
+  stroke-width: 0.08;
+  vector-effect: non-scaling-stroke;
+  cursor: nwse-resize;
+}
+/* Rotation handle: orange so the eye picks it out as a distinct
+   gesture from "drag to move" or "drag to resize". A thin guide line
+   runs from the centre to the handle so the user sees the current
+   pointing direction at a glance. */
+.edit-overlay__rotation-arm {
+  fill: none;
+  stroke: var(--color-snap, #e49325);
+  stroke-width: 0.05;
+  stroke-dasharray: 0.2 0.15;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+.edit-overlay__rotation-handle {
+  fill: var(--color-snap, #e49325);
+  stroke: #ffffff;
+  stroke-width: 0.06;
+  vector-effect: non-scaling-stroke;
+  cursor: grab;
+}
+.edit-overlay__rotation-handle:active {
+  cursor: grabbing;
+}
+
+/* Polyline-tool overlay (drawn into the SVG by PolylineTool) */
+.draft-polyline {
+  fill: none;
+  stroke: var(--color-area);
+  stroke-width: 0.06;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.draft-polyline__vertex {
+  fill: var(--color-area);
+}
+.draft-polyline__snap {
+  fill: none;
+  stroke: var(--color-snap);
+  stroke-width: 0.05;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Viewer surface */
+.viewer {
+  position: absolute;
+  inset: 0;
+}
+.viewer__canvas {
+  position: absolute;
+  inset: 0;
+  cursor: grab;
+}
+/* Drawing mode: crosshair the user can read as "place a point here".
+   We also force the crosshair on every descendant so a hover over a
+   draft vertex marker (or an existing IFC path) doesn't fall back to
+   the element's own cursor and confuse the user mid-stroke. */
+.viewer__canvas--drawing,
+.viewer__canvas--drawing * {
+  cursor: crosshair;
+}
+/* Snap-state cursor swap. The drawing tools add `--snap-vertex` when
+   the cursor is locking onto a corner / endpoint (an X reads as
+   "exact point lock"), and `--snap-edge` when it's projecting onto
+   a line (a small square = "on the edge somewhere"). Both fall back
+   to crosshair if the custom cursor can't be loaded.
+   Hot-spot offset 12 12 puts the cursor's reference pixel at the
+   center of the 24×24 SVG. */
+.viewer__canvas--snap-vertex,
+.viewer__canvas--snap-vertex * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18" stroke="%23e49325" stroke-width="3" stroke-linecap="round"/><line x1="18" y1="6" x2="6" y2="18" stroke="%23e49325" stroke-width="3" stroke-linecap="round"/><line x1="6" y1="6" x2="18" y2="18" stroke="%23ffffff" stroke-width="1" stroke-linecap="round"/><line x1="18" y1="6" x2="6" y2="18" stroke="%23ffffff" stroke-width="1" stroke-linecap="round"/></svg>') 12 12, crosshair;
+}
+.viewer__canvas--snap-edge,
+.viewer__canvas--snap-edge * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" fill="none" stroke="%23e49325" stroke-width="3"/><rect x="7" y="7" width="10" height="10" fill="none" stroke="%23ffffff" stroke-width="1"/></svg>') 12 12, crosshair;
+}
+.viewer__layers {
+  top: var(--space-3);
+  left: var(--space-3);
+  min-width: 220px;
+  max-height: calc(100% - 2 * var(--space-3));
+  overflow-y: auto;
+  z-index: var(--z-overlay);
+}
+.viewer__selection {
+  bottom: var(--space-3);
+  right: var(--space-3);
+  max-width: 260px;
+  z-index: var(--z-overlay);
+}
+.viewer__progress {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  z-index: var(--z-overlay);
+}
+.spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Generic helpers */
+.flex { display: flex; }
+.flex--col { flex-direction: column; }
+.gap-1 { gap: var(--space-1); }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.muted { color: var(--color-text-muted); }
+.spacer { flex: 1; }

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--
+      Defence-in-depth content security policy. GitHub Pages can't set
+      HTTP CSP headers, so we use the `<meta>` form. This means
+      `frame-ancestors` is NOT honoured here — the Trimble Connect host
+      controls iframe embedding via its own policies anyway.
+
+      script-src      — only our own bundle + the Trimble Workspace API
+                        component CDN. No 'unsafe-inline' / 'unsafe-eval'.
+      style-src       — 'unsafe-inline' is unavoidable because the SVG
+                        emitter uses element-level `style="..."` attrs
+                        (so does React inline `style={{...}}`). Google
+                        Fonts ships a `<link rel="stylesheet">` from a
+                        single host so we allow that origin specifically.
+      font-src        — Google Fonts plus self-hosted fallbacks.
+      img-src         — self + `data:` (the catalog's inlined SVG icons)
+                        + `blob:` (background-image previews built from
+                        File reads).
+      connect-src     — `https:` is broad but the Core API steers
+                        signed-URL fetches to dynamically-resolved AWS
+                        and Trimble regional hosts; we additionally
+                        validate the origin in coreApiClient.ts before
+                        each request, which is the real authoritative
+                        check. Plus blob:/data: for in-app file reads.
+      worker-src      — `blob:` is required because Vite serialises the
+                        IFC worker as an inline Blob URL.
+      object-src/base — locked down outright.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self';
+        script-src 'self' https://components.connect.trimble.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com data:;
+        img-src 'self' data: blob:;
+        connect-src 'self' https: blob: data:;
+        worker-src 'self' blob:;
+        object-src 'none';
+        base-uri 'self';
+      "
+    />
+    <title>sitePlan2D</title>
+    <link rel="icon" type="image/svg+xml" href="./public/assets/icon.svg" />
+    <!-- Open Sans = Trimble Modus brand typeface. Loaded async; the fallback
+         stack in src/styles/tokens.css keeps the UI usable until it arrives. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap"
+    />
+    <!-- Trimble Connect Workspace API. Same script the reference extension loads. -->
+    <script src="https://components.connect.trimble.com/trimble-connect-workspace-api/index.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
